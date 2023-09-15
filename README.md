@@ -31,6 +31,105 @@ Este repositorio contiene el desarrollo de varios servicios GCP en Golang para l
   go run main.go
   ```
 
+## Uso de los servicios
+
+Para el uso de los servicios hay 2 endpoint
+
+### POST
+
+- `/jobs` Enviar una lista de tareas para ejecutar
+
+#### Body
+
+El atributo arg de la peticion se tomara en cuenta para la correcta ejecucion de las tareas
+
+- Para realizar la tarea de tipo 1- Calcular la media de los numeros enviados
+
+```json
+{
+  "desc": "", // Descripcion de la tarea
+  "jobType": 1, // JobType 1 corresponde a Calcular la media de los numeros enviados
+  "priority": 1, // Prioridad maxima
+  "execType": 1, // Ejecucion inmediata
+  "payload": {
+    // Si ya se ha ejecutado la tarea
+    "Error": null,
+    "Result": 4.5
+  },
+  "args": {
+    "numbers": [1, 2, 3, 4] // Enviar de esta forma para la correcta ejecucion de la tarea
+  },
+  "createdAt": "0001-01-01T00:00:00Z"
+}
+```
+
+- Para realizar la tarea de tipo 2- Generar sugerencia de password segura
+
+```json
+{
+  "desc": "", // Descripcion de la tarea
+  "jobType": 2, // JobType 1 corresponde a Calcular la media de los numeros enviados
+  "priority": 1, // Prioridad maxima
+  "execType": 1, // Ejecucion inmediata
+  "payload": {
+    // Si ya se ha ejecutado la tarea
+    "Error": null,
+    "Result": ""
+  },
+  "args": {
+    // Enviar de esta forma para la correcta ejecucion de la tarea
+    "minNum": 1,
+    "minUpperCase": 1,
+    "minSpecialChar": 1,
+    "passwordLength": 8
+  },
+  "createdAt": "0001-01-01T00:00:00Z"
+}
+```
+
+- Para realizar la tarea de tipo 3- Sumar resultados de diferentes tareas de tipo 1 mediante ID
+
+```json
+{
+  "desc": "", // Descripcion de la tarea
+  "jobType": 2, // JobType 1 corresponde a Calcular la media de los numeros enviados
+  "priority": 1, // Prioridad maxima
+  "execType": 1, // Ejecucion inmediata
+  "payload": {
+    // Si ya se ha ejecutado la tarea
+    "Error": null,
+    "Result": ""
+  },
+  "args": {
+    // Enviar de esta forma para la correcta ejecucion de la tarea
+    "jobsIds": ["id1", "id2", "id3"]
+  },
+  "createdAt": "0001-01-01T00:00:00Z"
+}
+```
+
+### GET
+
+- `/job/:id` Obtener una tarea mediante su ID
+
+#### Respuesta
+
+```json
+{
+  "id": "8LKXPKZY72PQISNlH3AM",
+    "desc": "",
+    "jobType": 1,
+    "priority": 1,
+    "execType": 1,
+    "payload": { // Si ya se ha ejecutado la tarea
+        "Error": null,
+        "Result": 4.5
+    },
+    "args": any,
+    "createdAt": "0001-01-01T00:00:00Z"
+}
+```
+
 ## Primeros pasos
 
 Para el despliegue y prueba de este repositorio es necesario realizar estos primeros pasos:
