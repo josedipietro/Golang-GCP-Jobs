@@ -1,0 +1,8 @@
+.env
+*.sum
+service_account.json
+*.log
+.terraform
+*.lock.hcl
+*.lock.info
+*.tfstate*
